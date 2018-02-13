@@ -42,6 +42,7 @@ function createLocationResolveDialog(apiKey) {
         session.dialogData.locationQueryOptions = {
             countryCode: args.countryCode || null
         };
+        session.dialogData.maxCardCount = args.maxCardCount || MAX_CARD_COUNT;
         if (!args.skipDialogPrompt) {
             var promptSuffix = session.gettext(consts_1.Strings.TitleSuffix);
             session.send(args.prompt + promptSuffix).sendBatch();
@@ -53,7 +54,7 @@ function createLocationResolveDialog(apiKey) {
                 session.send(consts_1.Strings.LocationNotFound).sendBatch();
                 return;
             }
-            var locationCount = Math.min(MAX_CARD_COUNT, locations.length);
+            var locationCount = Math.min(session.dialogData.maxCardCount, locations.length);
             locations = locations.slice(0, locationCount);
             var reply = new location_card_builder_1.LocationCardBuilder(apiKey).createHeroCards(session, locations);
             session.send(reply);

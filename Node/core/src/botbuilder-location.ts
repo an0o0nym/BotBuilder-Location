@@ -17,7 +17,8 @@ export interface ILocationPromptOptions {
     useNativeControl?: boolean,
     reverseGeocode?: boolean,
     skipFavorites?: boolean,
-    countryCode?: string
+    countryCode?: string,
+    maxCardCount?: number
 }
 
 exports.LocationRequiredFields = requireFieldsDialog.LocationRequiredFields;

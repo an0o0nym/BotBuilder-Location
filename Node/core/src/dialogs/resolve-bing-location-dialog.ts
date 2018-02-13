@@ -45,6 +45,7 @@ function createLocationResolveDialog(apiKey: string) {
             session.dialogData.locationQueryOptions = {
                 countryCode: args.countryCode || null
             };
+            session.dialogData.maxCardCount = args.maxCardCount || MAX_CARD_COUNT;
 
             if (!args.skipDialogPrompt) {
                 var promptSuffix = session.gettext(Strings.TitleSuffix);
@@ -58,7 +59,7 @@ function createLocationResolveDialog(apiKey: string) {
                         return;
                     }
 
-                    var locationCount = Math.min(MAX_CARD_COUNT, locations.length);
+                    var locationCount = Math.min(session.dialogData.maxCardCount, locations.length);
                     locations = locations.slice(0, locationCount);
                     var reply = new LocationCardBuilder(apiKey).createHeroCards(session, locations);
                     session.send(reply);
